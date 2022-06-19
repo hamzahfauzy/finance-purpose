@@ -65,12 +65,16 @@
 
                                                 <?php else: ?>
 
+                                                    <?php if($data->status == 'diajukan'): ?>
+
                                                     <?php if(is_allowed('purposes/approve', auth()->user->id)): ?>
                                                         <a href="<?=routeTo('purposes/approve',['id'=>$data->id])?>" class="btn btn-sm btn-primary" onclick="if(confirm('Apakah anda yakin akan menyetujui proposal ini ?')){return true}else{return false}"><i class="fas fa-check"></i> Setujui</a>
                                                     <?php endif ?>
                                                 
                                                     <?php if(is_allowed('purposes/decline', auth()->user->id)): ?>
                                                         <a href="<?=routeTo('purposes/decline',['id'=>$data->id])?>" class="btn btn-sm btn-danger" onclick="if(confirm('Apakah anda yakin akan menolak proposal ini ?')){return true}else{return false}"><i class="fas fa-times"></i> Tolak</a>
+                                                    <?php endif ?>
+                                                    
                                                     <?php endif ?>
 
                                                 <?php endif ?>
