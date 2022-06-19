@@ -4,17 +4,22 @@ $conn = conn();
 $db   = new Database($conn);
 $success_msg = get_flash_msg('success');
 Page::set_title('Pengajuan');
-$db->query = "SELECT * FROM purposes JOIN purpose_items ON purpose_items.purpose_id = purposes.id";
+$user = auth()->user;
+$db->query = "SELECT * FROM purposes";
 
-if(get_role(auth()->user->id)->name != 'user')
+if(get_role($user->id)->name != 'user')
 {
-    $db->query .= " AND purposes.status <> 'draft'";
+    $db->query .= " WHERE status <> 'draft'";
+}
+else
+{
+    $db->query .= " WHERE user_id = '$user->id'";
 }
 
 $data = $db->exec('all');
 
 $data = array_map(function($d) use ($db){
-    $d->total_rincian = $db->sum('amount','purpose_items');
+    $d->total_rincian = $db->sum('amount','purpose_items',['purpose_id' => $d->id]);
     return $d;
 }, $data);
 
