@@ -13,6 +13,11 @@ if(get_role(auth()->user->id)->name != 'user')
 
 $data = $db->exec('all');
 
+$data = array_map(function($d) use ($db){
+    $d->total_rincian = $db->sum('amount','purpose_items');
+    return $d;
+}, $data);
+
 return [
     'datas' => $data,
     'success_msg' => $success_msg
