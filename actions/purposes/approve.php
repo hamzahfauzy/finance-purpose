@@ -4,9 +4,14 @@ $conn = conn();
 $db   = new Database($conn);
 $user = auth()->user;
 
+$purpose = $db->single('purposes',[
+    'id' => $_GET['id']
+]);
+
 $db->update('purposes',[
-    'status' => 'diterima',
-    'action_by' => $user->name
+    'status' => $purpose->notes?'diterima':'diajukan',
+    'notes'  => $purpose->notes?'':'menunggu approval ke 2',
+    'action_by' => $purpose->action_by?$purpose->action_by.','.$user->name:$user->name
 ],[
     'id' => $_GET['id']
 ]);

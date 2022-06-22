@@ -64,23 +64,7 @@
                     </div>
                 </div>
             </div>
-            <div class="row">
-                <div class="col-12">
-                    <div class="card">
-                        <div class="card-header">
-                            <div class="card-head-row">
-                                <div class="card-title">Grafik Anggaran</div>
-                            </div>
-                        </div>
-                        <div class="card-body">
-                            <div class="chart-container" style="min-height: 375px">
-                                <canvas id="statisticsChart"></canvas>
-                            </div>
-                            <div id="myChartLegend"></div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+            
         </div>
     </div>
 <?php load_templates('layouts/bottom',compact('statistikPengajuan')) ?>

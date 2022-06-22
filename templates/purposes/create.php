@@ -42,10 +42,6 @@
                                 </div>
                                 <?php endforeach ?>
                                 <div class="form-group">
-                                    <label for="">File</label>
-                                    <input type="file" name="file" class="form-control">
-                                </div>
-                                <div class="form-group">
                                     <button class="btn btn-primary">Submit</button>
                                 </div>
                             </form>

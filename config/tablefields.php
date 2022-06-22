@@ -59,20 +59,12 @@ return [
             'label' => 'Mata Uang',
             'type'  => 'options-obj:currencies,id,name',
         ],
-        'request_amount' => [
-            'label' => 'Jumlah',
-            'type'  => 'number',
-        ],
-        'request_amount_idr' => [
-            'label' => 'Jumlah dalam IDR',
-            'type'  => 'number',
-        ],
-        'bank_account_id' => [
+        'bank_account' => [
             'label' => 'Akun Bank',
-            'type'  => 'options-obj:bank_accounts,id,function($e){return $e->bank_name." (".$e->account_number.")"; };',
+            'type'  => 'text',
         ],
         'funding_type' => [
-            'label' => 'Jenis Pendanaan',
+            'label' => 'Divisi',
             'type'  => 'options-obj:funding_types,name,name',
         ],
         'description' => [
@@ -80,8 +72,12 @@ return [
             'type'  => 'text',
         ],
         'remark' => [
-            'label' => 'Remark',
+            'label' => 'Catatan',
             'type'  => 'text',
+        ],
+        'created_at' => [
+            'label' => 'Tanggal',
+            'type'  => 'date',
         ]
     ]
 ];

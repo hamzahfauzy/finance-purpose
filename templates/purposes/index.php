@@ -29,9 +29,8 @@
                                         <tr>
                                             <th width="20px">#</th>
                                             <th>Deskripsi</th>
+                                            <th>Bank</th>
                                             <th>Jumlah</th>
-                                            <th>Jumlah Dalam IDR</th>
-                                            <th>Total dalam Rincian</th>
                                             <th>Status</th>
                                             <th class="text-right">
                                             </th>
@@ -44,10 +43,12 @@
                                                 <?=$index+1?>
                                             </td>
                                             <td><?=$data->description?></td>
-                                            <td><?=number_format($data->request_amount)?></td>
-                                            <td><?=number_format($data->request_amount_idr)?></td>
+                                            <td><?=$data->bank_account?></td>
                                             <td><?=number_format($data->total_rincian)?></td>
-                                            <td><?=$data->status?></td>
+                                            <td>
+                                                <?=$data->status?>
+                                                <?=$data->notes?'<br>('.$data->notes.')':''?>
+                                            </td>
                                             <td>
                                                 <a href="<?=routeTo('purposes/view',['id'=>$data->id])?>" class="btn btn-sm btn-success"><i class="fas fa-eye"></i> Lihat</a>
 
@@ -67,12 +68,12 @@
 
                                                     <?php if($data->status == 'diajukan'): ?>
 
-                                                    <?php if(is_allowed('purposes/approve', auth()->user->id)): ?>
+                                                    <?php if(is_allowed('purposes/approve', auth()->user->id) && $data->action_by != auth()->user->name): ?>
                                                         <a href="<?=routeTo('purposes/approve',['id'=>$data->id])?>" class="btn btn-sm btn-primary" onclick="if(confirm('Apakah anda yakin akan menyetujui proposal ini ?')){return true}else{return false}"><i class="fas fa-check"></i> Setujui</a>
                                                     <?php endif ?>
                                                 
-                                                    <?php if(is_allowed('purposes/decline', auth()->user->id)): ?>
-                                                        <a href="<?=routeTo('purposes/decline',['id'=>$data->id])?>" class="btn btn-sm btn-danger" onclick="if(confirm('Apakah anda yakin akan menolak proposal ini ?')){return true}else{return false}"><i class="fas fa-times"></i> Tolak</a>
+                                                    <?php if(is_allowed('purposes/decline', auth()->user->id) && $data->action_by != auth()->user->name): ?>
+                                                        <a href="<?=routeTo('purposes/decline',['id'=>$data->id])?>" class="btn btn-sm btn-danger" onclick="doPrompt(this); return false"><i class="fas fa-times"></i> Tolak</a>
                                                     <?php endif ?>
                                                     
                                                     <?php endif ?>
@@ -90,4 +91,11 @@
             </div>
         </div>
     </div>
+    <script>
+    function doPrompt(el)
+    {
+        var reason = prompt('Berikan alasan penolakan','-');
+        location=el.href+'&reason='+reason
+    }
+    </script>
 <?php load_templates('layouts/bottom') ?>

@@ -42,12 +42,20 @@ if(request() == 'POST')
             'default/*',
             'purposes/index',
             'purposes/view',
-            'purposes/accept',
+            'purposes/approve',
             'purposes/decline',
         ],
         'user' => [
             'default/*',
-            'purposes/*',
+            'purposes/index',
+            'purposes/view',
+            'purposes/edit',
+            'purposes/delete',
+            'purposes/purpose',
+            'purposes/create',
+            'purposes/upload',
+            'purposes/item-delete',
+            'purposes/file-delete',
         ]
     ];
 

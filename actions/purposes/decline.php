@@ -6,6 +6,7 @@ $user = auth()->user;
 
 $db->update('purposes',[
     'status' => 'ditolak',
+    'notes'  => $_GET['reason'],
     'action_by' => $user->name
 ],[
     'id' => $_GET['id']

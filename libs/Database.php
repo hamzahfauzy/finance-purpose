@@ -129,11 +129,12 @@ class Database
         return $data->_TOTAL_;
     }
 
-    function sum($column, $table, $clause = [])
+    function sum($column, $table, $clause = [], $custom = false)
     {
         $this->table = $table;
         $conn = $this->connection;
-        $this->query = "SELECT SUM($column) as _TOTAL_ FROM $table";
+        $sum  = $custom ? $column : "SUM($column)";
+        $this->query = "SELECT $sum as _TOTAL_ FROM $table";
         $string = $this->build_clause($clause);
         if($string)
             $this->query .= ' WHERE '.$string;

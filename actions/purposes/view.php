@@ -5,10 +5,17 @@ $db   = new Database($conn);
 Page::set_title('Detail Pengajuan');
 $user_id = auth()->user->id;
 
-$data = $db->single('purposes',[
+$params = [
     'id' => $_GET['id'],
     'user_id' => $user_id
-]);
+];
+
+if(get_role($user_id)->name != 'user')
+{
+    unset($params['user_id']);
+}
+
+$data = $db->single('purposes',$params);
 
 $items = $db->all('purpose_items',[
     'purpose_id' => $_GET['id']
