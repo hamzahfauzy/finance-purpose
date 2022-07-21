@@ -28,10 +28,12 @@
                                     <thead>
                                         <tr>
                                             <th width="20px">#</th>
+                                            <th>No. Tiket</th>
                                             <th>Deskripsi</th>
                                             <th>Bank</th>
                                             <th>Jumlah</th>
                                             <th>Status</th>
+                                            <th>Status Dana</th>
                                             <th class="text-right">
                                             </th>
                                         </tr>
@@ -42,12 +44,17 @@
                                             <td>
                                                 <?=$index+1?>
                                             </td>
+                                            <td><?=$data->ticket?></td>
                                             <td><?=$data->description?></td>
                                             <td><?=$data->bank_account?></td>
                                             <td><?=number_format($data->total_rincian)?></td>
                                             <td>
                                                 <?=$data->status?>
                                                 <?=$data->notes?'<br>('.$data->notes.')':''?>
+                                            </td>
+                                            <td>
+                                                <?=$data->status_dana?>
+                                                <?=$data->note_status_dana?'<br>('.$data->note_status_dana.')':''?>
                                             </td>
                                             <td>
                                                 <a href="<?=routeTo('purposes/view',['id'=>$data->id])?>" class="btn btn-sm btn-success"><i class="fas fa-eye"></i> Lihat</a>
@@ -75,6 +82,16 @@
                                                     <?php if(is_allowed('purposes/decline', auth()->user->id) && $data->action_by != auth()->user->name): ?>
                                                         <a href="<?=routeTo('purposes/decline',['id'=>$data->id])?>" class="btn btn-sm btn-danger" onclick="doPrompt(this); return false"><i class="fas fa-times"></i> Tolak</a>
                                                     <?php endif ?>
+
+                                                    <?php elseif($data->status == 'diterima' && $data->status_dana == NULL): ?>
+
+                                                    <?php if(is_allowed('purposes/finance-done', auth()->user->id) && $data->action_by != auth()->user->name): ?>
+                                                        <a href="<?=routeTo('purposes/finance-done',['id'=>$data->id])?>" class="btn btn-sm btn-primary" onclick="if(confirm('Apakah anda yakin ?')){return true}else{return false}"><i class="fas fa-check"></i> Setujui Keuangan</a>
+                                                    <?php endif ?>
+                                                
+                                                    <?php if(is_allowed('purposes/finance-cancel', auth()->user->id) && $data->action_by != auth()->user->name): ?>
+                                                        <a href="<?=routeTo('purposes/finance-cancel',['id'=>$data->id])?>" class="btn btn-sm btn-danger" onclick="doPrompt(this); return false"><i class="fas fa-times"></i> Tolak Keuangan</a>
+                                                    <?php endif ?>
                                                     
                                                     <?php endif ?>
 
@@ -95,6 +112,9 @@
     function doPrompt(el)
     {
         var reason = prompt('Berikan alasan penolakan','-');
+        if (reason === null) {
+            return; //break out of the function early
+        }
         location=el.href+'&reason='+reason
     }
     </script>

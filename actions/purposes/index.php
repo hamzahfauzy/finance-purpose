@@ -19,6 +19,7 @@ else
 $data = $db->exec('all');
 
 $data = array_map(function($d) use ($db){
+    $d->ticket = 'PUR-'.$d->id.'.'.$d->user_id.'.'.$d->purpose_type_id;
     $d->total_rincian = $db->sum('qty * price','purpose_items',['purpose_id' => $d->id]);
     return $d;
 }, $data);
