@@ -39,13 +39,13 @@ foreach($data as $index => $d)
 {
     $rows[] = [
         $index,
-        $data->ticket,
-        $data->description,
-        $data->bank_account,
-        number_format($data->total_rincian),
-        $data->status.' '.($data->notes?'('.$data->notes.')':''),
-        $data->status_dana.' '.($data->note_status_dana?'('.$data->note_status_dana.')':''),
-        $data->remark,
+        $d->ticket,
+        $d->description,
+        $d->bank_account,
+        number_format($d->total_rincian),
+        $d->status.' '.($d->notes?'('.$d->notes.')':''),
+        $d->status_dana.' '.($d->note_status_dana?'('.$d->note_status_dana.')':''),
+        $d->remark,
     ];
 }
 
