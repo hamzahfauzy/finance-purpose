@@ -14,7 +14,7 @@ $data = array_map(function($d) use ($db){
 }, $data);
 
 $rows = [
-    ['No','Tanggal','Deskripsi','Divisi','NamaUser','Status']
+    ['No','Tanggal','Deskripsi','Divisi','NamaUser','Status','Total']
 ];
 foreach($data as $index => $d)
 {
@@ -24,7 +24,8 @@ foreach($data as $index => $d)
         $d->description,
         $d->funding_type,
         $d->user->name,
-        $d->status
+        $d->status,
+        $d->total_rincian,
     ];
 }
 

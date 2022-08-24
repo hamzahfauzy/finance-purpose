@@ -30,6 +30,7 @@
                                             <th>Divisi</th>
                                             <th>Nama User</th>
                                             <th>Status</th>
+                                            <th>Total</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -43,6 +44,7 @@
                                             <td><?=$data->funding_type?></td>
                                             <td><?=$data->user->name?></td>
                                             <td><?=$data->status?></td>
+                                            <td>Rp. <?=number_format($data->total_rincian)?></td>
                                         </tr>
                                         <?php endforeach ?>
                                     </tbody>

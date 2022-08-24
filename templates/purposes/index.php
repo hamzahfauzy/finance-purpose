@@ -8,6 +8,10 @@
                         <h5 class="text-white op-7 mb-2">Memanajemen fitur - fitur pengajuan</h5>
                     </div>
                     <div class="ml-md-auto py-2 py-md-0">
+                        <?php if(is_allowed('purposes/export', auth()->user->id)): ?>
+                        <a href="<?=routeTo('purposes/export')?>" class="btn btn-secondary btn-round">Export</a>
+                        <?php endif ?>
+
                         <?php if(is_allowed('purposes/create', auth()->user->id)): ?>
                         <a href="<?=routeTo('purposes/create')?>" class="btn btn-secondary btn-round">Buat Pengajuan</a>
                         <?php endif ?>
@@ -34,6 +38,7 @@
                                             <th>Jumlah</th>
                                             <th>Status</th>
                                             <th>Status Dana</th>
+                                            <th>Catatan</th>
                                             <th class="text-right">
                                             </th>
                                         </tr>
@@ -56,6 +61,7 @@
                                                 <?=$data->status_dana?>
                                                 <?=$data->note_status_dana?'<br>('.$data->note_status_dana.')':''?>
                                             </td>
+                                            <td><?=$data->remark?></td>
                                             <td>
                                                 <a href="<?=routeTo('purposes/view',['id'=>$data->id])?>" class="btn btn-sm btn-success"><i class="fas fa-eye"></i> Lihat</a>
 
