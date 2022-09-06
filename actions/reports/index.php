@@ -9,7 +9,9 @@ $db->query = "SELECT * FROM purposes WHERE status <> 'draft'";
 $data = $db->exec('all');
 
 $data = array_map(function($d) use ($db){
+    $d->ticket = 'PUR-'.$d->id.'.'.$d->user_id.'.'.$d->purpose_type_id;
     $d->user = $db->single('users',['id' => $d->user_id]);
+    $d->purpose_type = $db->single('purpose_types',['id' => $d->purpose_type_id]);
     $d->total_rincian = $db->sum('qty * price','purpose_items',['purpose_id' => $d->id]);
     return $d;
 }, $data);

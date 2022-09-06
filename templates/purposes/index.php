@@ -33,6 +33,13 @@
                                         <tr>
                                             <th width="20px">#</th>
                                             <th>No. Tiket</th>
+                                            <?php if(in_array(get_role(auth()->user->id)->name,["user","admin","super admin","approval finance"])): ?>
+                                            <th>Tanggal</th>
+                                            <?php endif ?>
+                                            <?php if(in_array(get_role(auth()->user->id)->name,["approval finance"])): ?>
+                                            <th>Divisi</th>
+                                            <th>User</th>
+                                            <?php endif ?>
                                             <th>Deskripsi</th>
                                             <th>Bank</th>
                                             <th>Jumlah</th>
@@ -50,6 +57,13 @@
                                                 <?=$index+1?>
                                             </td>
                                             <td><?=$data->ticket?></td>
+                                            <?php if(in_array(get_role(auth()->user->id)->name,["user","admin","super admin","approval finance"])): ?>
+                                            <td><?=$data->created_at?></td>
+                                            <?php endif ?>
+                                            <?php if(in_array(get_role(auth()->user->id)->name,["approval finance"])): ?>
+                                            <td><?=$data->funding_type?></td>
+                                            <td><?=$data->user->name?></td>
+                                            <?php endif ?>
                                             <td><?=$data->description?></td>
                                             <td><?=$data->bank_account?></td>
                                             <td><?=number_format($data->total_rincian)?></td>

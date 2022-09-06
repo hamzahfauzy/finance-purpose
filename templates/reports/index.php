@@ -25,12 +25,15 @@
                                     <thead>
                                         <tr>
                                             <th width="20px">#</th>
+                                            <th>Tiket</th>
                                             <th>Tanggal</th>
-                                            <th>Deskripsi</th>
                                             <th>Divisi</th>
                                             <th>Nama User</th>
+                                            <th>Deskripsi</th>
+                                            <th>Tipe Pengajuan</th>
+                                            <th>Bank</th>
+                                            <th>Jumlah</th>
                                             <th>Status</th>
-                                            <th>Total</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -39,10 +42,13 @@
                                             <td>
                                                 <?=$index+1?>
                                             </td>
+                                            <td><?=$data->ticket?></td>
                                             <td><?=$data->created_at?></td>
-                                            <td><?=$data->description?></td>
                                             <td><?=$data->funding_type?></td>
                                             <td><?=$data->user->name?></td>
+                                            <td><?=$data->description?></td>
+                                            <td><?=$data->purpose_type->name?></td>
+                                            <td><?=$data->bank_account?></td>
                                             <td><?=$data->status?></td>
                                             <td>Rp. <?=number_format($data->total_rincian)?></td>
                                         </tr>
