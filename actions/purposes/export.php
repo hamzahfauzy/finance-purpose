@@ -27,6 +27,7 @@ $rows = [
     [
         '#',
         'No. Tiket',
+        'Tanggal',
         'Deskripsi',
         'Bank',
         'Jumlah',
@@ -40,6 +41,7 @@ foreach($data as $index => $d)
     $rows[] = [
         $index,
         $d->ticket,
+        $d->created_at,
         $d->description,
         $d->bank_account,
         number_format($d->total_rincian),
