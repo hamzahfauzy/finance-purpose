@@ -20,7 +20,7 @@ $data = $db->exec('all');
 
 $data = array_map(function($d) use ($db){
     $d->user = $db->single('users',['id' => $d->user_id]);
-    $d->ticket = 'PUR-'.$d->id.'.'.$d->user_id.'.'.$d->purpose_type_id;
+    $d->ticket = 'BMTz '.$d->id.'.'.$d->user_id.'.'.$d->purpose_type_id;
     $d->total_rincian = $db->sum('qty * price','purpose_items',['purpose_id' => $d->id]);
     return $d;
 }, $data);
