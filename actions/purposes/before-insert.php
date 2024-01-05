@@ -14,7 +14,8 @@ if($lastTicket && $lastTicket->ticket)
 {
   $explodeTicket = explode('.', $lastTicket->ticket);
   $lastRecord    = (int) end($explodeTicket);
-  $recordNumber  = ($lastRecord < 10 ? "0" : ($lastRecord < 100 ? "00" : "")) . $recordNumber;
+  $lastRecord    = $lastRecord+1;
+  $recordNumber  = ($lastRecord < 10 ? "0" : ($lastRecord < 100 ? "00" : "")) . $lastRecord;
 }
 
 $_POST['purposes']['ticket'] = $ticket.$recordNumber;
